@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Loading, LoadingController } from 'ionic-angular';
+// import { LoadingController } from 'ionic-angular';
 
 import { AuthenticationService } from '../services/authentication.service';
 
@@ -13,41 +13,41 @@ export class LoginPage implements OnInit {
 
   constructor(
     private authService: AuthenticationService,
-    private loadingController: LoadingController
+    // private loadingController: LoadingController
   ) {}
 
   async ngOnInit() {
     // Web only: If redirected back to app after login and using implicitLogin = 'CURRENT' (current window),
     // pass along the auth details, such as access token, to Auth Connect
     if (window.location.hash) {
-      const loadingIndicator = await this.showLoadingIndictator();
+      // const loadingIndicator = await this.showLoadingIndictator();
       try {
         // Once handleCallback completes, Auth Connect calls onLoginSuccess() in Authentication service
         await this.authService.handleCallback(window.location.href);
       } catch (e) {
         this.errorMessage = e.message;
       } finally {
-        loadingIndicator.dismiss();
+        // loadingIndicator.dismiss();
       }
     }
   }
 
   async login() {
-    const loadingIndicator = await this.showLoadingIndictator();
+    // const loadingIndicator = await this.showLoadingIndictator();
     try {
       await this.authService.login();
     } catch (e) {
       console.log(`caught error ${e.message}`);
     } finally {
-      loadingIndicator.dismiss();
+      // loadingIndicator.dismiss();
     }
   }
 
-  private async showLoadingIndictator(): Promise<Loading> {
-    const loadingIndicator = await this.loadingController.create({
-      content: 'Opening login window...'
-    });
-    await loadingIndicator.present();
-    return loadingIndicator;
-  }
+  // private async showLoadingIndictator(): Promise<Loading> {
+  //   const loadingIndicator = this.loadingController.create({
+  //     content: 'Opening login window...'
+  //   });
+  //   await loadingIndicator.present();
+  //   return loadingIndicator;
+  // }
 }

@@ -10,6 +10,8 @@ export const azureWebConfig: IonicAuthOptions = {
   // The platform which we are running on
   platform: 'web',
 
+  scope: 'openid',
+
   // client or application id for provider
   clientID: 'client_ID',
 
@@ -18,13 +20,13 @@ export const azureWebConfig: IonicAuthOptions = {
   // discoveryUrl: 'https://vikingsquad.b2clogin.com/vikingsquad.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1_Signup_Signin',
 
   // the URI to redirect to after log in
-  redirectUri: 'http://localhost:9100/login',
+  redirectUri: 'http://localhost:9100/',
 
   // requested scopes from provider
   // scope: 'openid offline_access email profile https://vikingsquad.onmicrosoft.com/webinar/user_impersonation',
 
   // the URL to redirect to after log out
-  logoutUrl: 'http://localhost:9100/login',
+  logoutUrl: 'http://localhost:9100/',
 
   // Show provider login in either current window or new tab
   implicitLogin: 'CURRENT',
