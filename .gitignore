@@ -32,3 +32,8 @@ npm-debug.log*
 
 ionic.config.json
 .npmrc
+
+# used for env files on first setup
+env
+*.env
+sentry.properties

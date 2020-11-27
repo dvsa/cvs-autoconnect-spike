@@ -2,6 +2,16 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 import { IonicAuthOptions } from '@ionic-enterprise/auth';
+// import { config } from 'dotenv';
+// import { existsSync } from 'fs';
+
+// config({ path: '../../.env' });
+
+// if (existsSync('.env')) {
+//   config({ path: '.env' });
+// } else {
+//   process.exit(88);
+// }
 
 export const azureWebConfig: IonicAuthOptions = {
   // the auth provider
@@ -10,20 +20,20 @@ export const azureWebConfig: IonicAuthOptions = {
   // The platform which we are running on
   platform: 'web',
 
-  scope: 'openid',
-
   // client or application id for provider
-  clientID: 'client_ID',
+  clientID: secrets.client_id,
 
   // the discovery url for the provider
   // OpenID configuration
   // discoveryUrl: 'https://vikingsquad.b2clogin.com/vikingsquad.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1_Signup_Signin',
+  discoveryUrl: `https://login.microsoftonline.com/${secrets.tenant_id}/v2.0/.well-known/openid-configuration?appid=${secrets.client_id}`,
 
   // the URI to redirect to after log in
-  redirectUri: 'http://localhost:9100/',
+  redirectUri: 'http://localhost:9100/login',
 
   // requested scopes from provider
   // scope: 'openid offline_access email profile https://vikingsquad.onmicrosoft.com/webinar/user_impersonation',
+  scope: 'openid',
 
   // the URL to redirect to after log out
   logoutUrl: 'http://localhost:9100/',
