@@ -1,9 +1,10 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { Platform, Nav } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { DefaultSession } from '@ionic-enterprise/identity-vault';
 
-import { AuthenticationService } from './services/authentication.service';
 import { LoginPage } from './login/login.page';
+import { IdentityService } from './services/identity/identity.service';
 
 @Component({
   selector: 'app-root',
@@ -15,15 +16,13 @@ export class AppComponent implements OnInit {
   public rootPage: any = LoginPage;
 
   constructor(
-    private auth: AuthenticationService,
+    private identity: IdentityService,
     private platform: Platform,
     private splashScreen: SplashScreen
   ) {
     this.initializeApp();
 
-    this.auth.loginStatusChanged.subscribe((authenticated) =>
-      this.handleAuthChange(authenticated)
-    );
+    this.identity.changed.subscribe((session) => this.handleSessionChange(session));
   }
 
   ngOnInit(): void {
@@ -52,8 +51,8 @@ export class AppComponent implements OnInit {
   }
 
   // Handle login status change event
-  private handleAuthChange(authenticated: boolean) {
-    if (authenticated) {
+  private handleSessionChange(session: DefaultSession) {
+    if (session) {
       this.navElem.setRoot('/home');
     } else {
       this.navElem.setRoot('/login');

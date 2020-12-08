@@ -8,7 +8,8 @@ export class AuthGuard implements CanActivate {
   constructor(private authentication: AuthenticationService, private navCtrl: NavController) {}
 
   async canActivate(): Promise<boolean> {
-    const authed = await this.authentication.isAuthenticated();
+    // const authed = await this.authentication.isAuthenticated();
+    const authed = await this.authentication.getAuth.isAuthenticated();
     if (authed) {
       return true;
     } else {
