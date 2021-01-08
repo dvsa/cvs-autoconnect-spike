@@ -15,7 +15,7 @@ export class HomePage implements OnInit {
     this.user = await this.authService.getUserInfo();
   }
 
-  async logout() {
-    await this.authService.logout();
+  logout() {
+    this.authService.onLogout();
   }
 }

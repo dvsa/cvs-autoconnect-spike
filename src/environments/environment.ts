@@ -13,37 +13,26 @@ import { IonicAuthOptions } from '@ionic-enterprise/auth';
 //   process.exit(88);
 // }
 
+export const secrets = {
+  client_id: 'please ask',
+  tenant_id: 'please ask'
+};
+
 export const azureWebConfig: IonicAuthOptions = {
-  // the auth provider
   authConfig: 'azure',
-
-  // The platform which we are running on
   platform: 'web',
-
-  // client or application id for provider
   clientID: secrets.client_id,
-
-  // the discovery url for the provider
-  // OpenID configuration
-  // discoveryUrl: 'https://vikingsquad.b2clogin.com/vikingsquad.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1_Signup_Signin',
   discoveryUrl: `https://login.microsoftonline.com/${secrets.tenant_id}/v2.0/.well-known/openid-configuration?appid=${secrets.client_id}`,
-
-  // the URI to redirect to after log in
-  redirectUri: 'http://localhost:9100/login',
-
-  // requested scopes from provider
-  // scope: 'openid offline_access email profile https://vikingsquad.onmicrosoft.com/webinar/user_impersonation',
+  // redirectUri: 'http://localhost:8100/login',
+  redirectUri: 'http://localhost:9100/',
   scope: 'openid',
-
-  // the URL to redirect to after log out
+  //scope: 'openid offline_access profile email',
+  // logoutUrl: 'http://localhost:8100/login',
   logoutUrl: 'http://localhost:9100/',
-
-  // Show provider login in either current window or new tab
-  implicitLogin: 'CURRENT',
-
-  tokenStorageProvider: 'localStorage',
-
   logLevel: 'DEBUG'
+
+  // implicitLogin: 'CURRENT'
+  // tokenStorageProvider: 'localStorage',
 };
 
 export const azureNativeConfig: IonicAuthOptions = {
