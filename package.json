@@ -16,7 +16,8 @@
     "cordova:configure": "ionic cordova platform add ios@5.0.1",
     "build:ios": "cordova build ios",
     "serve:browser": "ionic serve",
-    "serve:ios": "ionic cordova run ios -l --external"
+    "serve:ios": "ionic cordova run ios -l --external",
+    "serve:2": "ionic cordova run ios -- --buildFlag=\"-UseModernBuildSystem=0\""
   },
   "dependencies": {
     "@angular/animations": "5.2.11",
