@@ -14,8 +14,8 @@ import { IonicAuthOptions } from '@ionic-enterprise/auth';
 // }
 
 export const secrets = {
-  client_id: 'please ask',
-  tenant_id: 'please ask'
+  client_id: '',
+  tenant_id: ''
 };
 
 export const azureWebConfig: IonicAuthOptions = {
@@ -24,11 +24,10 @@ export const azureWebConfig: IonicAuthOptions = {
   clientID: secrets.client_id,
   discoveryUrl: `https://login.microsoftonline.com/${secrets.tenant_id}/v2.0/.well-known/openid-configuration?appid=${secrets.client_id}`,
   // redirectUri: 'http://localhost:8100/login',
-  redirectUri: 'http://localhost:9100/',
-  scope: 'openid',
-  //scope: 'openid offline_access profile email',
+  redirectUri: 'http://localhost:8100/#',
+  scope: 'openid offline_access profile email',
   // logoutUrl: 'http://localhost:8100/login',
-  logoutUrl: 'http://localhost:9100/',
+  logoutUrl: 'http://localhost:8100',
   logLevel: 'DEBUG'
 
   // implicitLogin: 'CURRENT'

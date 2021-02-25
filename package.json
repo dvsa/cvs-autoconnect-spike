@@ -9,7 +9,7 @@
   },
   "postinstall": "echo \"\n Angular app has been created with npx - npx ionic start <appName> blank --cordova --type=ionic-angular\" && npm run cordova:configure",
   "scripts": {
-    "start": "ionic-app-scripts serve --port 9100",
+    "start": "ionic-app-scripts serve --port 8100",
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
     "lint": "ionic-app-scripts lint",
@@ -17,6 +17,7 @@
     "build:ios": "cordova build ios",
     "serve:browser": "ionic serve",
     "serve:ios": "ionic cordova run ios -l --external",
+    "emulate:ios": "ionic cordova emulate ios",
     "serve:2": "ionic cordova run ios -- --buildFlag=\"-UseModernBuildSystem=0\""
   },
   "dependencies": {
@@ -30,7 +31,6 @@
     "@angular/platform-browser-dynamic": "5.2.11",
     "@angular/router": "5.2.11",
     "@ionic-enterprise/auth": "3.1.4",
-    "@ionic-enterprise/identity-vault": "^4.2.7",
     "@ionic-native/core": "4.20.0",
     "@ionic-native/splash-screen": "4.20.0",
     "@ionic-native/status-bar": "4.20.0",
@@ -52,6 +52,7 @@
     "@ionic/cli": "^6.12.2",
     "@types/jasmine": "^2.5.41",
     "@types/node": "14.6.2",
+    "@ionic-enterprise/identity-vault": "^4.2.7",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
     "cordova-plugin-ionic-webview": "^4.2.1",

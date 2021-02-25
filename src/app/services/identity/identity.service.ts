@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+// import { Router } from '@angular/router';
 import { Platform } from 'ionic-angular';
 
 import { Subject } from 'rxjs';
@@ -17,7 +17,7 @@ import {
 // import { User } from '../../models/user';
 import { BrowserAuthPlugin } from '../browser-auth/browser-auth.plugin';
 // import { PinDialogComponent } from '../../pin-dialog/pin-dialog.component';
-import { SettingsService } from '../settings/settings.service';
+// import { SettingsService } from '../settings/settings.service';
 
 @Injectable()
 export class IdentityService extends IonicIdentityVaultUser<DefaultSession> {
@@ -30,9 +30,8 @@ export class IdentityService extends IonicIdentityVaultUser<DefaultSession> {
   constructor(
     private browserAuthPlugin: BrowserAuthPlugin,
     // private modalController: ModalController,
-    private router: Router,
-    private platorm: Platform,
-    private settings: SettingsService
+    // private router: Router,
+    private platorm: Platform // private settings: SettingsService
   ) {
     super(platorm, {
       restoreSessionOnReady: false,
@@ -65,21 +64,22 @@ export class IdentityService extends IonicIdentityVaultUser<DefaultSession> {
   // }
 
   async setDesiredAuthMode(): Promise<void> {
-    const mode = (await this.useBiometrics())
-      ? AuthMode.BiometricOnly
-      : (await this.settings.usePasscode())
-      ? AuthMode.PasscodeOnly
-      : (await this.settings.useSecureStorageMode())
-      ? AuthMode.SecureStorage
-      : AuthMode.InMemoryOnly;
+    // const mode = (await this.useBiometrics())
+    //   ? AuthMode.BiometricOnly
+    //   : (await this.settings.usePasscode())
+    //   ? AuthMode.PasscodeOnly
+    //   : (await this.settings.useSecureStorageMode())
+    //   ? AuthMode.SecureStorage
+    //   : AuthMode.InMemoryOnly;
+    const mode = AuthMode.SecureStorage;
 
     return await this.setAuthMode(mode);
   }
 
-  private async useBiometrics(): Promise<boolean> {
-    const use = await Promise.all([this.settings.useBiometrics(), this.isBiometricsAvailable()]);
-    return use[0] && use[1];
-  }
+  // private async useBiometrics(): Promise<boolean> {
+  //   const use = await Promise.all([this.settings.useBiometrics(), this.isBiometricsAvailable()]);
+  //   return use[0] && use[1];
+  // }
 
   async remove(): Promise<void> {
     await this.logout();
@@ -152,7 +152,7 @@ export class IdentityService extends IonicIdentityVaultUser<DefaultSession> {
   onVaultLocked() {
     console.log('Vault Locked');
     this._changed.next();
-    this.router.navigate(['login']);
+    // this.router.navigate(['login']);
   }
 
   getPlugin(): IonicNativeAuthPlugin {

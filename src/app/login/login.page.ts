@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthMode } from '@ionic-enterprise/identity-vault';
+// import { AuthMode } from '@ionic-enterprise/identity-vault';
 // import { LoadingController } from 'ionic-angular';
 
 import { AuthenticationService } from '../services/authentication.service';
-import { IdentityService } from '../services/identity/identity.service';
+// import { IdentityService } from '../services/identity/identity.service';
 
 @Component({
   selector: 'app-login',
@@ -15,8 +15,7 @@ export class LoginPage implements OnInit {
   loginType: string;
 
   constructor(
-    private authService: AuthenticationService,
-    private identity: IdentityService // private loadingController: LoadingController
+    private authService: AuthenticationService // private identity: IdentityService // private loadingController: LoadingController
   ) {}
 
   async ngOnInit() {
@@ -48,37 +47,37 @@ export class LoginPage implements OnInit {
   private async setUnlockType(): Promise<void> {
     const previousLoginType = this.loginType;
 
-    this.loginType = await this.determineLoginType();
+    // this.loginType = await this.determineLoginType();
     if (previousLoginType && !this.loginType) {
       alert('The vault is no longer accessible. Please login again');
     }
   }
 
-  private async determineLoginType() {
-    let loginType;
+  // private async determineLoginType() {
+  //   let loginType;
 
-    if (await this.identity.hasStoredSession()) {
-      const authMode = await this.identity.getAuthMode();
-      switch (authMode) {
-        case AuthMode.BiometricAndPasscode:
-          loginType = await this.identity.supportedBiometricTypes();
-          loginType += ' (Passcode Fallback)';
-          return loginType;
+  //   if (await this.identity.hasStoredSession()) {
+  //     const authMode = await this.identity.getAuthMode();
+  //     switch (authMode) {
+  //       case AuthMode.BiometricAndPasscode:
+  //         loginType = await this.identity.supportedBiometricTypes();
+  //         loginType += ' (Passcode Fallback)';
+  //         return loginType;
 
-        case AuthMode.BiometricOnly:
-          const vault = await this.identity.getVault();
-          const bioLockedOut = await vault.isLockedOutOfBiometrics();
-          const bioAvailable = await this.identity.isBiometricsAvailable();
-          // Making this conditional on Bio being locked out only makes sense if we are using
-          // allowSystemPinFallback like we are in this demo
-          return (loginType =
-            bioAvailable || bioLockedOut ? await this.identity.supportedBiometricTypes() : '');
+  //       case AuthMode.BiometricOnly:
+  //         const vault = await this.identity.getVault();
+  //         const bioLockedOut = await vault.isLockedOutOfBiometrics();
+  //         const bioAvailable = await this.identity.isBiometricsAvailable();
+  //         // Making this conditional on Bio being locked out only makes sense if we are using
+  //         // allowSystemPinFallback like we are in this demo
+  //         return (loginType =
+  //           bioAvailable || bioLockedOut ? await this.identity.supportedBiometricTypes() : '');
 
-        case AuthMode.PasscodeOnly:
-          return (loginType = 'Passcode');
-      }
-    }
-  }
+  //       case AuthMode.PasscodeOnly:
+  //         return (loginType = 'Passcode');
+  //     }
+  //   }
+  // }
 
   async login() {
     // const loadingIndicator = await this.showLoadingIndictator();
@@ -89,6 +88,9 @@ export class LoginPage implements OnInit {
     } finally {
       // loadingIndicator.dismiss();
     }
+  }
+  async refresh() {
+    await this.authService.getAuth.refreshSession();
   }
 
   // private async showLoadingIndictator(): Promise<Loading> {
